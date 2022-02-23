@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="display: flex;align-items: center;flex-direction: column;">
+  {% if messages %}
+  <div class="alert alert-danger alert-dismissible fade show m-3">
+  {% for message in messages %}
+  <li{% if message.tags %} class="text-{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+  </div>
+  {% endif %}
+</div>
+    <div class="channel-detail">
+      <span class="profile-pic">
+      {% if user.profile_pic %}
+      <img src="{{user.profile_pic.url}}" alt="" class="channel-profile" srcset="" />
+      {% endif %}
+      {% if not user.profile_pic %}
+      <img src="" alt="Not set yet !" class="channel-profile" srcset="" />
+      {% endif %}
+      <button class="icon-container" id="profile-edit-icon"><i class="fas fa-pen"></i></button>
+      <form action="" class="form" id="profile-pic-form" action='/channel/userchannel' method="POST" enctype="multipart/form-data" required>
+	  {% csrf_token %}
+      <input type="file" name="profile_pic" class="form-control-file" id="">
+      <button class="icon-container" type="submit" id="profile-save-icon"><i class=" fas fa-save"></i></button>
+    </form>
+    </span>
+      <div class="channel-name-subscriber">
+        <div class="channel-name">
+          <span class="channel-name-text" id="channel-name"> {{user.channel_name}} </span
+          >
+          <button class="icon-container" id="name-edit-icon"><i class="fas fa-pen"></i></button>
+          <form class="channel-edit"
+          method='POST'
+          action="/channel/userchannel"
+          required
+            >
+            {% csrf_token %}
+            <input
+              type="text"
+              name="channel-name"
+              id="channel-name-edit-text"
+              class="form-control " placeholder="Ex. My Channel" value='{{user.channel_name}}'/>
+            <button class="icon-container" type="submit" id="name-save-icon"><i class=" fas fa-save"></i></button>
+            </form>
+        </div>        <div class="channel-subscriber text-muted">{{subscription}}</div>
+        <!-- <div class="mt-1"><button class="btn btn-danger " >Subscribe</button></div> -->
+      </div>
+    </div>
+  
+    <div class="video-gallery row">
+      <div class="errors text-center text-danger">
+        {% if error %}
+          {{error}}
+        {% endif %}
+      </div>
+      {% for video in videos %}
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <a href="/video/{{video.id}}" class="card mb-3">
+                <img src="{{video.thumbnail.url}}" class="card-img-top" alt="Thumbnail">
+                <div class="card-body">
+                  <h5 class="card-title">{{video.title}}</h5>
+                  <p><span class='channel'><i class="fas fa-play"></i><span class="channel-name text-muted"> {{video.user.channel_name}}</span></span></p>
+                  <p class="card-text"><small class="text-muted">{{video.uploaded_at}}</small></p>
+                </div>
+              </a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

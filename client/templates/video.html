@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+    <link rel="stylesheet" href="{% static './css/video.css' %}">
+    <script src="{% static './js/afterglow.min.js' %}"></script>
+{% endblock %}
+{% block content %}
+   <div class="row p-1">
+       <!-- Video player section -->
+       <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+           <video controls class="video" id="myvideo" width="100%">
+               <source src="{{video.video.url}}" type="video/mp4" >
+           </video>
+           <div class="video-detail">
+            <div class="video-title">
+                {{video.title}}
+            </div>
+            <div class="short-des">
+                    <p>
+                    {{video.description}}
+                    </p>    
+            </div>
+            <hr>
+            <div class="likes-dislikes-comments">
+                <span class="likes-dislikes">
+                    <a class="likes" href="/video/{{video.id}}/like"><i class="far {% if liked %}fas {% endif %}fa-thumbs-up"></i> {{likes}}</a>
+                    <a class="dislikes" href="/video/{{video.id}}/dislike"><i class="far {% if disliked %}fas {% endif %} fa-thumbs-down"></i> {{dislikes}}</a>
+                </span>
+                <button class="comments btn btn-light" id="comments">
+                    comments
+                </button>
+            </div>
+            <div class="view-comments" id='view-comments'>
+                {% if not comments.count %}
+                    <div>Nobody commented yet </div>
+                {% endif %}
+                {% for comment in comments %}
+                <div class="comment m-2">
+                    <div class="comment-header">
+                    <span class="d-flex">
+                        <img src="{{comment.user.profile_pic.url}}" alt="" class="commentor-profile-pic">
+                        <span class="commentor-channel">
+                            {{comment.user.channel_name}}
+                        </span>
+                    </span>
+                    <span class="text-muted">{{comment.created_at}}</span>
+                </div>
+                    <div class="comment-text">
+                    {{comment.comment}}         
+           </div>
+                </div>
+                {% endfor %}
+                <form action="/video/{{video.id}}/comment" class="comment-form" method="POST">
+                    {% csrf_token %}
+                    <textarea name="comment" class="form-control mb-3" placeholder="Write your comment here..."></textarea>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    
+    <!-- Related video section -->
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+
+        <span class="heading-text">Related Video</span>
+        {% for video in related %}
+        <a class="related-video-container" href="/video/{{video.id}}">
+                <span class="thumbnail"><img src="{{video.thumbnail.url}}" alt="" srcset=""></span>
+            <span class="detail">
+                <div class="title">{{video.title}}</div>
+                <div class="channel"><i class="fas fa-check"></i><span class="channel-name"> {{video.user.channel_name}}</span></div>
+            </span> 
+        </a>
+        {% endfor %}
+    </div>
+   </div> 
+{% endblock %}

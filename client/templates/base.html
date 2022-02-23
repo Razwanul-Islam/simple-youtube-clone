@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuminol</title>
+    <link rel="stylesheet" href="{% static './css/mdb.min.css' %}">
+    <link rel="stylesheet" href="{% static './css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+    {% block header %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar nav">
+	
+		<span class='toogle-container'>
+          <button class="btn btn-danger toggler" id='toggler'><i class="fas fa-bars"></i></button>
+        <span class="logo"><img src="{% static './images/logo.png' %}" alt=""></span>
+        <ul class="nav-menu" id='nav__menu'>
+          <li class="menu-item"><i class="fas fa-home"></i> <a href="/"><span class="link-text"> Home</span></a></li>
+          <li class="menu-item"><i class="fas fa-user"></i> <a href="/auth/login"><span class="link-text">login</span></a></li>
+          <li class="menu-item"><i class="fas fa-play"></i> <a href="/channel/userchannel"><span class="link-text">My Channel</span></a></li>
+          <li class="menu-item"><i class="fas fa-arrow-up"></i> <a href="/channel/video/upload"><span class="link-text">Upload Video</span></a></li>
+          {% if user.is_authenticated %}
+          <li class="menu-item"><i class="fas fa-sign-out-alt"></i> <a href="/auth/logout"><span class="link-text">Logout</span></a></li>
+          {% endif %}
+        </ul>
+      </span>
+        <form action="/search" method="GET" class="form-group">
+            {% csrf_token %}
+        <input type="text" class="text-input" name="q" id="">
+        <button type="submit" class="btn btn-outline-secondary search-btn"><i class="fas fa-search"></i></button>
+        </form>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+<!-- Javascript section -->
+<script src="{% static './js/jquery-slim.min.js' %}"></script>
+<script src="{% static './js/all.min.js' %}"></script>
+<script src="{% static './js/style.js' %}"></script>
+{% block js_section %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,174 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+.nav{
+    height: 60px;
+    display: flex;
+    position: sticky;
+    z-index: 999;
+    top: 0px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    background: rgb(245, 35, 77);
+    
+}
+.nav .logo img{
+    width:100px;
+    height: auto;
+
+}
+
+
+/* Toggler */
+.toggler{
+    font-size: large;
+    padding:2px 10px;
+    box-shadow: none;
+    background: rgb(245, 35, 77);
+}
+
+/* Nav menu */
+.nav-menu{
+    width:0px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top:60px;
+    left:0px;
+    transition: 0.4s;
+    background: white;
+    height: calc(100vh - 60px);
+    margin: 0;
+    padding:0;
+
+}
+.nav-menu li{
+    list-style: none;
+    padding:10px;
+    color:grey;
+}
+.nav-menu li:hover{
+    box-shadow: 0px 0px 5px rgb(201, 201, 201);
+}
+.nav-menu li .link-text{
+    margin-left:1rem;
+}
+.toggler:focus  ~ .nav-menu{
+    width: 250px;
+    box-shadow:250px calc(100vw - 250px) 0px calc(100vw - 250px) rgba(44, 44, 44, 0.486);
+}
+
+.form-group{
+    display: flex;
+    height: 2rem;
+}
+.form-group .text-input{
+    border:0px;
+    width:180px;
+    border-right:1px solid gray;
+    height: 100%;
+    border-radius: 8px 0px 0px 8px;   
+    padding:0px 0.8rem; 
+}
+.form-group .search-btn{
+    border:0px;
+    height: 100%;
+    background: white;
+    color:gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    border-radius: 0px 8px 8px 0px;
+    width:2rem;
+    padding:0;
+}
+.text-input:focus,.search-btn:focus{
+    outline:none;
+}
+.video-gallery{
+    padding:1rem;
+    background-color: rgb(255, 255, 255);
+}
+.card{
+    box-shadow: none;
+    border:1px solid rgb(238, 238, 238);
+    transition: 0.5s;
+    color: gray;
+    text-decoration: none;
+}
+.card:hover{
+    box-shadow: 0px 1px 15px rgb(202, 202, 202);
+    transform: translateY(-5px);
+}
+.card-title{
+    font-size: medium;
+}
+.card-text{
+    font-size: smaller;
+}
+.card p{
+    margin:0px;
+}
+
+.channel .channel-name{
+    font-size: smaller;
+    color:grey;
+}
+
+/* for channel page */
+.channel-detail{
+    padding:1rem;
+    display: flex;
+    align-items: center;
+    background: rgb(238, 238, 238);
+}
+.channel-detail .channel-profile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.channel-detail .channel-name-subscriber{
+    margin-left: 0.4rem;
+    display: block;
+}
+.channel-name-subscriber .channel-name{
+    display: flex;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+.channel-name .channel-edit{
+    display: flex;
+}
+.icon-container{
+    margin-left: 5px;
+    font-size: 1rem;
+    color: gray;
+    border:none;
+}
+#channel-name-edit-text, #name-save-icon{
+    display:none;
+}
+.channel-name-subscriber .channel-subscriber{
+    font-size: 1rem;
+}
+
+
+/* Profile pic user channel */
+.profile-pic{
+    position: relative;
+}
+#profile-edit-icon{
+    position: absolute;
+    right:0;
+    bottom:0;
+    background: rgba(0, 0, 0, 0.459);
+    color:white;
+    border-radius:50%;
+}
+#profile-pic-form{
+    display:none;
+}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+    <div class="video-gallery row">
+      <div class="errors text-center text-danger">
+        {% if error %}
+          {{error}}
+        {% endif %}
+      </div>
+      {% for video in videos %}
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <a href="/video/{{video.id}}" class="card mb-3">
+                <img src="{{video.thumbnail.url}}" class="card-img-top" alt="Thumbnail">
+                <div class="card-body">
+                  <h5 class="card-title">{{video.title}}</h5>
+                  <p><span class='channel'><i class="fas fa-play"></i><span class="channel-name text-muted"> {{video.user.channel_name}}</span></span></p>
+                  <p class="card-text"><small class="text-muted">{{video.uploaded_at}}</small></p>
+                </div>
+              </a>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block js_section %}
+    
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}   
+   <div class="form p-2" >
+        <form action="{% url 'video_upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-2">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="" class="form-control">
+            </div>
+            <br>
+            <div class="mb-2">
+                <label for="description">Description</label>
+                <textarea name="description" id="" class="form-control"></textarea>
+            </div>
+            <br>
+            <div class="mb-2">
+                <label for="video">Video</label>
+                <input type="file" name="video" id="" class="form-control-file">
+            </div>
+
+            <br>
+            <div class="mb-2">
+                <label for="video">Thumbnail</label>
+                <input type="file" name="thumbnail" id="" class="form-control-file">
+            </div>
+            <br>
+            <div class="mb-2">
+                <label for="tags">Tags <span class="text-muted">(Comma separated)</span></label>
+                <input type="text" name="tags" id="" class="form-control">
+            </div>
+            <br>
+            <div class="mb-2">
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
